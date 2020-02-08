@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import MapComponent from './Components/MapComponent/MapComponent'
+import SearchComponent from './Components/SearchComponent/SearchComponent'
+import { Row, Col } from 'antd';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Row style={{height:"100%"}}>
+    <Col span="4">
+      <SearchComponent/>
+    </Col>
+    <Col span="20" style={{height:"100%"}}>
+      <MapComponent/>
+    </Col>
+      </Row>
     </div>
   );
 }
-
 export default App;

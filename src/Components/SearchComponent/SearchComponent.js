@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Select, Card ,Empty } from 'antd';
 import{mapStateToProps}from"./maping"
 import{connect}from "react-redux"
-import { DrawPolygon ,getCenter ,getWeatherData} from '../../Helpers'
+import { DrawGeometry ,getCenter ,getWeatherData} from '../../Helpers'
 import "./style.css"
 import Polygon from 'ol/geom/Polygon';
 let axios = require('axios')
@@ -40,9 +40,10 @@ handleChange = value => {
   };
   
   handelSelect=(e)=>{
-    let poly = new Polygon([this.state.data[e].geometry.coordinates[0].slice(1)])
-  DrawPolygon(this.props.map,this.props.vectorSource,poly)
-  getWeatherData(getCenter(this.state.data[e].geometry.coordinates[0].slice(1))).then(re=>{
+    let polyGeometry = this.state.data[e].geometry.coordinates[0].slice(1);
+    let poly = new Polygon([polyGeometry])
+    DrawGeometry(this.props.map,this.props.vectorSource,poly)
+    getWeatherData(getCenter(polyGeometry)).then(re=>{
     this.setState({WeatherData:{temp:re.data[0].temp,description:re.data[0].weather.description}})
   })
   }
